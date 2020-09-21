@@ -6,10 +6,12 @@ import java.util.List;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
+@Table(name="show")
 public class Show {
 @Id
 private Integer showId;
