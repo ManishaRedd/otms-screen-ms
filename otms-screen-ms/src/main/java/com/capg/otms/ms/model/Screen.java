@@ -9,28 +9,27 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name = "Screen")
-
+@Table(name="Screen_tbl")
 public class Screen {
 		@Id
-		@GeneratedValue(strategy=GenerationType.SEQUENCE)
 		@Column(name="screenid")
 		private int screenId;
+		
+		@GeneratedValue(strategy=GenerationType.SEQUENCE) //theatre id is auto generated with this
+		@Column(name="theatreid")
+		private int theatreId;
 		
 		@Column(name="screenname")
 		private String screenName;
 		
-		@Column(name="theatreid")
-		private int theatreId;
-		
-		@OneToMany
-		private List<Show> showList= new ArrayList<>();
 		
 		@DateTimeFormat(pattern = "yyyy/MM/dd ")
 		private LocalDate movieEndDate;
@@ -41,11 +40,12 @@ public class Screen {
 		@Column(name = "columns_details")
 		private int columns;
 
+		
 		public Screen() {
 			super();
 		}
        //constructor with parameters
-		public Screen(int screenId, int theatreId, String screenName, List<Show> showList,
+		public Screen(int screenId, int theatreId, String screenName, 
 				LocalDate movieEndDate, int rows, int columns) {
 			super();
 			this.screenId = screenId;
@@ -80,9 +80,6 @@ public class Screen {
 			this.screenName = screenName;
 		}
 
-		public List<Show> getShowList() {
-			return showList;
-		}
 
 
 		public LocalDate getMovieEndDate() {
@@ -112,7 +109,7 @@ public class Screen {
 		//returns the objects of parent class
 		@Override
 		public String toString() {
-			return "Screen [screenId=" + screenId + ", theatreId=" +theatreId+ ", screenName=" + screenName + ", showList="
-					+ ", movieEndDate=" + movieEndDate + ", rows=" + rows + ", columns=" + columns + "]";
+			return "Screen [screenId=" + screenId + ", theatreId=" +theatreId+ ", screenName=" + screenName 
+					+ ", movieEndDate=" + movieEndDate + "]';  rows=" + rows + ", columns=" + columns + "]";
 		}
 }

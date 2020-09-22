@@ -29,7 +29,7 @@ public class ScreenController {
 	ScreenServiceImpl screenService; // we cannot create object to an interface but we can have a reference
 
 	
-	@GetMapping("/all")  // it is request mapping with get method
+	@GetMapping("/all")  // This is request mapping with get method
 	public List<Screen> findAllScreens() {
 
 		return screenService.findAllScreens();
@@ -54,7 +54,8 @@ public class ScreenController {
 	}
 
 	@DeleteMapping("/delete/id/{id}")
-	public void deleteScreenById(@PathVariable("id") int screenId) {
+	public void deleteScreenById(@PathVariable("id") int screenId) { 	// inorder to map a parameter from model to method parameters we use @pathvariable
+
 
 		screenService.deleteScreenById(screenId);
 
