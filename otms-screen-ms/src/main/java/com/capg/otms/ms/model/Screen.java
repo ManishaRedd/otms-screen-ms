@@ -16,14 +16,14 @@ import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-@Entity
-@Table(name="Screen_tbl")
+@Entity //this makes the class as an entity class which is mapped to a database table
+@Table(name="Screen_tbl") //this specifies the name of the database table to which the class has to be mapped
 public class Screen {
 		@Id
 		@Column(name="screenid")
 		private int screenId;
 		
-		@GeneratedValue(strategy=GenerationType.SEQUENCE) //theatre id is auto generated with this
+		@GeneratedValue(strategy=GenerationType.SEQUENCE) //theatre id is auto generated 
 		@Column(name="theatreid")
 		private int theatreId;
 		

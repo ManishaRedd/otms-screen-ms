@@ -26,6 +26,10 @@ public class ScreenServiceImpl implements IScreenService {
 	@Override
 	public Screen addScreen(Screen screen)  {
 
+		Integer screenId = screen.getScreenId();
+		if (screenId == 0) {
+			throw new InvalidInputException("screen id cannot be 0 ");
+		}
 		return screenRepo.saveAndFlush(screen);
 	}
 	
@@ -38,7 +42,6 @@ public class ScreenServiceImpl implements IScreenService {
 			throw new InvalidInputException("screen id cannot be 0 ");
 		} else if (screenRepo.existsById(screenId)) {
 			Screen updateScreen = screenRepo.getOne(screenId);
-
 			updateScreen.setScreenName(screen.getScreenName());
 			updateScreen.setColumns(screen.getColumns());
 			updateScreen.setRows(screen.getRows());

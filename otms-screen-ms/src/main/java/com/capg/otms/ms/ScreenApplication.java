@@ -7,8 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @SpringBootApplication
-@EnableAutoConfiguration
-@EntityScan(basePackages= {"com.capg.otms.ms.model"})
+ //it is a combination of @configuration, @componentscan, @enableautoconfiguration
+ //it will configure the bean class, starts component scan from base package
+ //tomcat embbeded with ready to serve beans
+
 public class ScreenApplication {
 
 	public static void main(String[] args) {
