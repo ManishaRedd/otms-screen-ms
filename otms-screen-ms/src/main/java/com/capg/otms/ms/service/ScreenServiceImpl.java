@@ -9,8 +9,9 @@ import org.springframework.stereotype.Service;
 
 import com.capg.otms.ms.exception.InvalidInputException;
 import com.capg.otms.ms.exception.MovieException;
+import com.capg.otms.ms.model.Login;
 import com.capg.otms.ms.model.Screen;
-
+import com.capg.otms.ms.repository.LoginRepo;
 import com.capg.otms.ms.repository.ScreenRepo;
 
 //it indicates the class as a service class
@@ -21,6 +22,8 @@ public class ScreenServiceImpl implements IScreenService {
 	@Autowired
 	ScreenRepo screenRepo;
 
+	@Autowired
+	LoginRepo loginRepo;
 	
 	// implements abstract classes from service interface by overriding those methods so that we write our own code
 	@Override
@@ -75,13 +78,15 @@ public class ScreenServiceImpl implements IScreenService {
 		return screenRepo.getOne(screenId);
 	}
 
+
+
 	@Override
-	public boolean validateScreenId(int screenId) {
-		String screen = Integer.toString(screenId);
-		if (!(screen.length()>= 1))
-			throw new MovieException("ScreenId cannot be zero");
-		return true;
+	public Login findUser(String username, String password) {
+		return loginRepo.findUser(username,password);
+		
 	}
+
+	
 }
 
 

@@ -2,6 +2,7 @@ package com.capg.otms.ms.service;
 
 import java.util.List;
 
+import com.capg.otms.ms.model.Login;
 import com.capg.otms.ms.model.Screen;
 
 public interface IScreenService {
@@ -11,6 +12,6 @@ public interface IScreenService {
 	boolean deleteScreenById(int screenId);
 	List<Screen> findAllScreens();
 	Screen getScreenById(int screenId);
+	public Login findUser(String username , String password);
 	
-	boolean validateScreenId(int screenId);
 }

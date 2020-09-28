@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.capg.otms.ms.exception.MovieException;
+import com.capg.otms.ms.model.Login;
 import com.capg.otms.ms.model.Screen;
 import com.capg.otms.ms.service.ScreenServiceImpl;
 
@@ -28,6 +30,18 @@ public class ScreenController {
 	
 	ScreenServiceImpl screenService; // we cannot create object to an interface but we can have a reference
 
+	@GetMapping("admin/login/{user}/{pass}")
+	public ResponseEntity<Login>  findUserLogin(@PathVariable("user") String username, @PathVariable("pass") String password) 
+	{
+	  
+		 Login log = screenService.findUser(username,password);
+		 if(log==null) {
+			 throw new MovieException("Login not successfull");
+		 }
+		 return new ResponseEntity<>(log,HttpStatus.OK);
+		
+		
+	}
 	
 	@GetMapping("/all")  // This is request mapping with get method
 	public List<Screen> findAllScreens() {
@@ -36,14 +50,20 @@ public class ScreenController {
 
 	}
 
+	@GetMapping("/{id}")
+	// inorder to map a parameter from uri to method parameters we use @pathvariable
+	public ResponseEntity<Screen> findScreenById(@PathVariable("id") int screenId) throws MovieException {
+
+		return new ResponseEntity<>(screenService.getScreenById(screenId), HttpStatus.OK);
+	}
 	@PostMapping("/add")
-	public Screen addScreen(@RequestBody Screen screen) {
-		if (screenService.validateScreenId(screen.getScreenId())) {
-			Screen screen1 = screenService.addScreen(screen);
-			screen = screen1;
-		}
-		return screen;
-}
+
+	// requestbody maps httprequest json format data from the client to the local
+	// object screen
+	public ResponseEntity<Screen> createScreen(@RequestBody Screen screen) {
+		return new ResponseEntity<>(screenService.addScreen(screen), HttpStatus.OK);
+	}
+
 		
 
 	@PutMapping("/update")
